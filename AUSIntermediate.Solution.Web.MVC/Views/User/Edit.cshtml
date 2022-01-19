@@ -1,0 +1,201 @@
+﻿@model AUSIntermediate.Solution.Web.MVC.Models.UserModel
+@{
+    bool IsResidentialAddress = false;
+}
+<div class="container">
+    <form method="post" asp-action="Edit">
+
+        <div class"row">
+
+            <div class="card col-md-12">
+                <div class="card-header">
+                    <h5>Personal Details</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <input asp-for="UserId" hidden />
+                        <div class="form-group col-md-6">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Surname"></label>
+                            <input asp-for="Surname" class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="IdentityNumber"></label>
+                            <input asp-for="IdentityNumber" class="form-control" />
+                            <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="DateOfBirth"></label>
+                            <input asp-for="DateOfBirth" class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Contact"></label>
+                            <input asp-for="Contact" class="form-control" />
+                            <span asp-validation-for="Contact" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+        @foreach (var address in Model.Addresses)
+        {
+            if (!address.IsResidentialAddress)
+            {
+                Model.PostalAddress = address;
+                <div class"row">
+
+                    <div class="card col-md-12">
+                        <div class="card-header">
+                            <h5>Postal Address</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <input asp-for="PostalAddress.AddressId" hidden />
+                                <input asp-for="PostalAddress.CompanyId" hidden />
+                                <input asp-for="PostalAddress.UserId" hidden />
+                                <div class="form-group col-md-6">
+                                    <label asp-for="PostalAddress.Country"></label>
+                                    <input asp-for="PostalAddress.Country" class="form-control" />
+                                    <span asp-validation-for="PostalAddress.Country" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="PostalAddress.Province"></label>
+                                    <input asp-for="PostalAddress.Province" class="form-control" />
+                                    <span asp-validation-for="PostalAddress.Province" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="PostalAddress.City"></label>
+                                    <input asp-for="PostalAddress.City" class="form-control" />
+                                    <span asp-validation-for="PostalAddress.City" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="PostalAddress.Suburb"></label>
+                                    <input asp-for="PostalAddress.Suburb" class="form-control" />
+                                    <span asp-validation-for="PostalAddress.Suburb" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="PostalAddress.UnitNumber"></label>
+                                    <input asp-for="PostalAddress.UnitNumber" class="form-control" />
+                                    <span asp-validation-for="PostalAddress.UnitNumber" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="PostalAddress.PostalCode"></label>
+                                    <input asp-for="PostalAddress.PostalCode" class="form-control" />
+                                    <span asp-validation-for="PostalAddress.PostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="PostalAddress.ComplexName"></label>
+                                    <input asp-for="PostalAddress.ComplexName" class="form-control" />
+                                    <span asp-validation-for="PostalAddress" class="text-danger"></span>
+                                </div>                           
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            if (address.IsResidentialAddress)
+            {
+                Model.ResidentialAddress = address;
+                <div class"row">
+
+                    <div class="card col-md-12">
+                        <div class="card-header">
+                            <h5>Residential Address</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <input asp-for="ResidentialAddress.AddressId" hidden />
+                                <input asp-for="ResidentialAddress.CompanyId" hidden />
+                                <input asp-for="ResidentialAddress.UserId" hidden />
+                                <div class="form-group col-md-6">
+                                    <label asp-for="ResidentialAddress.Country"></label>
+                                    <input asp-for="ResidentialAddress.Country" class="form-control" />
+                                    <span asp-validation-for="ResidentialAddress.Country" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="ResidentialAddress.Province"></label>
+                                    <input asp-for="ResidentialAddress.Province" class="form-control" />
+                                    <span asp-validation-for="ResidentialAddress.Province" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="ResidentialAddress.City"></label>
+                                    <input asp-for="ResidentialAddress.City" class="form-control" />
+                                    <span asp-validation-for="ResidentialAddress.City" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="ResidentialAddress.Suburb"></label>
+                                    <input asp-for="ResidentialAddress.Suburb" class="form-control" />
+                                    <span asp-validation-for="ResidentialAddress.Suburb" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="ResidentialAddress.UnitNumber"></label>
+                                    <input asp-for="ResidentialAddress.UnitNumber" class="form-control" />
+                                    <span asp-validation-for="ResidentialAddress.UnitNumber" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="ResidentialAddress.PostalCode"></label>
+                                    <input asp-for="ResidentialAddress.PostalCode" class="form-control" />
+                                    <span asp-validation-for="ResidentialAddress.PostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="ResidentialAddress.ComplexName"></label>
+                                    <input asp-for="ResidentialAddress.ComplexName" class="form-control" />
+                                    <span asp-validation-for="ResidentialAddress.ComplexName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+
+
+
+
+        <div class="row py-2 mt-2">
+            <div class="col-sm-12 text-right">                
+                <input type="submit" class="btn btn-outline-primary" value="Save Changes" />                
+                <a asp-action="Index" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i> Back</a>           
+            </div>         
+        </div>
+    </form>
+</div>
