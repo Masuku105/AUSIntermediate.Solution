@@ -62,16 +62,14 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
                     {
                         var residentialAddress = _objecMapper.Map<AddressModel, AddressDTO>(user.ResidentialAddress);
                         residentialAddress.IsResidentialAddress = true;
-                        residentialAddress.UserId = savedUser.UserId;
-                        residentialAddress.CompanyId = 1;
+                        residentialAddress.UserId = savedUser.UserId;                       
                         await _addressBusiness.AddAddress(residentialAddress);
                     }
                     if (user.PostalAddress != null)
                     {
 
                         var postalAddress = _objecMapper.Map<AddressModel, AddressDTO>(user.ResidentialAddress);
-                        postalAddress.UserId = savedUser.UserId;
-                        postalAddress.CompanyId = 2;
+                        postalAddress.UserId = savedUser.UserId;                    
                         await _addressBusiness.AddAddress(postalAddress);
                       
                     }
@@ -110,7 +108,9 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
             try
             {
                 await _userBusiness.UpdateUser(_objecMapper.Map<UserDTO>(user));
+                if(user.PostalAddress != null)
                 await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.PostalAddress));
+                if (user.PostalAddress != null)
                 await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.ResidentialAddress));
 
             }

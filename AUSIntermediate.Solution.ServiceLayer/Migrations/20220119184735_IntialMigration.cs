@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AUSIntermediate.Solution.ServiceLayer.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class IntialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,7 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -69,18 +70,14 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UnitNUmber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ComplexName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsResidentialAddress = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Addresses", x => x.AddressId);
-                    table.ForeignKey(
-                        name: "FK_Addresses_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
+        
                     table.ForeignKey(
                         name: "FK_Addresses_Users_UserId",
                         column: x => x.UserId,
@@ -88,6 +85,26 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Contact", "DateOfBirth", "Email", "IdentityNumber", "Name", "Surname" },
+                values: new object[] { 1, "0761234566", new DateTime(2022, 1, 19, 20, 47, 35, 28, DateTimeKind.Local).AddTicks(2232), "John@ausafrica.com", "1234567890123", "John", "Doe" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Contact", "DateOfBirth", "Email", "IdentityNumber", "Name", "Surname" },
+                values: new object[] { 2, "0761234566", new DateTime(2022, 1, 19, 20, 47, 35, 29, DateTimeKind.Local).AddTicks(4874), "xolani@gmail.com", "1234567890123", "Xolani", "2" });
+
+            migrationBuilder.InsertData(
+                table: "Addresses",
+                columns: new[] { "AddressId", "City", "CompanyId", "ComplexName", "Country", "IsResidentialAddress", "PostalCode", "Province", "Suburb", "UnitNUmber", "UserId" },
+                values: new object[] { 1, "Midrand", 0, "Business Complex", "South Africa", true, "01100", "Gauteng", "Midrand", "45627", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Addresses",
+                columns: new[] { "AddressId", "City", "CompanyId", "ComplexName", "Country", "IsResidentialAddress", "PostalCode", "Province", "Suburb", "UnitNUmber", "UserId" },
+                values: new object[] { 2, "Durban", 0, "Curry Road", "South Africa", false, "01100", "Kwazulu Natal", "Newlands", "X1234", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CompanyId",

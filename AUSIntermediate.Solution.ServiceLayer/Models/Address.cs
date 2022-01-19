@@ -25,7 +25,6 @@ namespace AUSIntermediate.Solution.ServiceLayer.Models
         public User User { get; set; }
 
 
-        public int CompanyId { get; set; }
-        public Company Company { get; set; }
+        
     }
 }

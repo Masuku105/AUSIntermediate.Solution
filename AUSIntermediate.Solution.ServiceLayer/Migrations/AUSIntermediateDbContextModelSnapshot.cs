@@ -63,6 +63,36 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1,
+                            City = "Midrand",
+                            CompanyId = 0,
+                            ComplexName = "Business Complex",
+                            Country = "South Africa",
+                            IsResidentialAddress = true,
+                            PostalCode = "01100",
+                            Province = "Gauteng",
+                            Suburb = "Midrand",
+                            UnitNUmber = "45627",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            City = "Durban",
+                            CompanyId = 0,
+                            ComplexName = "Curry Road",
+                            Country = "South Africa",
+                            IsResidentialAddress = false,
+                            PostalCode = "01100",
+                            Province = "Kwazulu Natal",
+                            Suburb = "Newlands",
+                            UnitNUmber = "X1234",
+                            UserId = 2
+                        });
                 });
 
             modelBuilder.Entity("AUSIntermediate.Solution.ServiceLayer.Models.Company", b =>
@@ -141,6 +171,28 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Contact = "0761234566",
+                            DateOfBirth = new DateTime(2022, 1, 19, 20, 49, 2, 794, DateTimeKind.Local).AddTicks(8662),
+                            Email = "John@ausafrica.com",
+                            IdentityNumber = "1234567890123",
+                            Name = "John",
+                            Surname = "Doe"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Contact = "0761234566",
+                            DateOfBirth = new DateTime(2022, 1, 19, 20, 49, 2, 795, DateTimeKind.Local).AddTicks(8598),
+                            Email = "xolani@gmail.com",
+                            IdentityNumber = "1234567890123",
+                            Name = "Xolani",
+                            Surname = "2"
+                        });
                 });
 
             modelBuilder.Entity("AUSIntermediate.Solution.ServiceLayer.Models.Address", b =>

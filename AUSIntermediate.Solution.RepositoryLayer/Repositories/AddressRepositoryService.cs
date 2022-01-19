@@ -48,8 +48,7 @@ namespace AUSIntermediate.Solution.RepositoryLayer.Repositories
             oldAddress.UnitNUmber = address.UnitNUmber; 
             oldAddress.PostalCode = address.PostalCode;
             oldAddress.ComplexName = address.ComplexName;
-            oldAddress.UserId = address.UserId; 
-            oldAddress.CompanyId = address.CompanyId;   
+            oldAddress.UserId = address.UserId;            
 
 
             await _dbContext.SaveChangesAsync();
