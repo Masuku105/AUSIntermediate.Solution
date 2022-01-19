@@ -12,19 +12,12 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-black bg-white border-bottom box-shadow mb-3">
             <div class="container">               
+                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AUSIntermediate</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">
-                        <img id="img_logo" alt="Logo" src="@Url.Content("~/Content/Image/logo-1-300x235.png")" />
-                        </span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-right">
-                    <ul class="navbar-nav flex-grow-1">                                               
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
         </nav>
     </header>
@@ -52,8 +45,10 @@
     <script src="~/lib/fontawesome-free-6.0.0-beta3-web/fontawesome-free-6.0.0-beta3-web/css/all.css"></script> 
     <script src="~/lib/fontawesome-free-6.0.0-beta3-web/js/all.js"></script>
 
-
-    
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("Notyf") 
+    @RenderSection("Scripts", required: false)
+        
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 

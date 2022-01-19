@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace AUSIntermediate.Solution.Web.MVC.Controllers
 {
@@ -16,13 +17,18 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
         private readonly IUserBusinessLogic _userBusiness;
         private readonly IMapper _objecMapper;
         private readonly IAddressBusinessLogic _addressBusiness;
-        
-        public UserController(IUserBusinessLogic userBusiness,IAddressBusinessLogic addressBusiness, IMapper objecMapper)
+        private readonly INotyfService _notyf;
+
+        public UserController(IUserBusinessLogic userBusiness
+            ,IAddressBusinessLogic addressBusiness
+            , IMapper objecMapper, INotyfService notyf)
         {
             _userBusiness = userBusiness;
             _objecMapper = objecMapper;
             _addressBusiness = addressBusiness;
-            
+            _notyf = notyf;
+
+
         }
         public async Task<IActionResult> Index()
         {
@@ -48,7 +54,7 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserModel user)
         {
-            Notify("Check");
+            
             var userDto = new UserDTO();
             if(ModelState.IsValid)
             {
@@ -56,8 +62,9 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
                 var newUser = _objecMapper.Map<UserModel, UserDTO>(user);
                 try
                 {
-                    Notify("Check");
+                    
                     var savedUser = await _userBusiness.AddNewUser(newUser);
+                    
                     if (user.ResidentialAddress != null)
                     {
                         var residentialAddress = _objecMapper.Map<AddressModel, AddressDTO>(user.ResidentialAddress);
@@ -73,12 +80,13 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
                         await _addressBusiness.AddAddress(postalAddress);
                       
                     }
+                    _notyf.Success($"{savedUser.Name} Successfully Added");
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
-                    Notify("User Details Capturing Failed",NotificationType.Error.ToString(),NotificationType.Error);
-                    
+                    _notyf.Error($"An Exception Occured {ex.Message}");
+
                 }        
 
 
@@ -112,11 +120,12 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
                 await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.PostalAddress));
                 if (user.PostalAddress != null)
                 await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.ResidentialAddress));
-
+                _notyf.Success("Successfully Updated Data");
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Index", ex);
+                _notyf.Error($"An Exception Occured {ex.Message}");
+                return RedirectToAction("Index");
             }
            
             return RedirectToAction("Index");         
@@ -138,11 +147,12 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
                 {
                     await _addressBusiness.DeleteAddress(address.AddressId);
                 }
+                _notyf.Success("User Removed");
 
             }
             catch (Exception ex)
             {
-
+                _notyf.Error($"An Exception Occured {ex.Message}");
             }
             return RedirectToAction("Index");
         }
