@@ -19,6 +19,8 @@ using AUSIntermediate.Solution.BusinessLogicLayer.Interfaces;
 using AUSIntermediate.Solution.Web.MVC.Helpers;
 using System.Reflection;
 using AUSIntermediate.Solution.BusinessLogicLayer.Services.AddressBLL;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 
 namespace AUSIntermediate.Solution.Web.MVC
 {
@@ -37,13 +39,16 @@ namespace AUSIntermediate.Solution.Web.MVC
             services.AddDbContext<AUSIntermediateDbContext>(options =>
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
+            services.AddNotyf(config => { config.DurationInSeconds = 15; 
+                config.IsDismissable = true; 
+                config.Position = NotyfPosition.TopRight; });
 
             services.AddTransient<IUserRepositoryService, AddressRepositoryServic>();
             services.AddTransient<IUserBusinessLogic, UserBusinessLogic>();
             services.AddTransient<IAddressRepositoryService, AddressRepositoryService>();
             services.AddTransient<IAddressBusinessLogic, AddressBusinessLogic>();
 
-
+            
 
             services.AddAutoMapper(typeof(BusinessMappingProfiles), typeof(MvcMappingProfiles));
 
@@ -69,7 +74,7 @@ namespace AUSIntermediate.Solution.Web.MVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseNotyf();
             app.UseRouting();
 
             app.UseAuthorization();
