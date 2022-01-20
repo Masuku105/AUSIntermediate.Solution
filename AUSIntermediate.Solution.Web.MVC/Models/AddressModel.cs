@@ -20,6 +20,6 @@ namespace AUSIntermediate.Solution.Web.MVC.Models
         public string ComplexName { get; set; }
         public bool IsResidentialAddress { get; set; }
         public int UserId { get; set; }
-        public int CompanyId { get; set; }
+        
     }
 }

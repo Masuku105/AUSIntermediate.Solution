@@ -16,6 +16,7 @@ namespace AUSIntermediate.Solution.Web.MVC.Models
         public string Surname { get; set; }
         [Display(Name = "Identity Number")]
         [Required(ErrorMessage = "Your ID Number Is Required!")]
+        [StringLength(13, MinimumLength = 13)]
         public string IdentityNumber { get; set; }
         [Display(Name = "Date of Birth")]
         [Required(ErrorMessage = "Your Date Of Birth Is Required!")]
@@ -28,7 +29,7 @@ namespace AUSIntermediate.Solution.Web.MVC.Models
 
         [Display(Name = "Contact Number")]
         [Required(ErrorMessage = "Your Email Address Is Required!")]
-        [StringLength(10)]
+        [StringLength(10,MinimumLength =10)]
         public string Contact { get; set; }
         public List<AddressModel> Addresses { get; set; }
 

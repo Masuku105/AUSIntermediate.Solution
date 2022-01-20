@@ -20,7 +20,6 @@ namespace AUSIntermediate.Solution.ServiceLayer.Models
         public string ComplexName { get; set; }
         public bool IsResidentialAddress { get; set; }
 
-
         public int UserId { get; set; }
         public User User { get; set; }
 

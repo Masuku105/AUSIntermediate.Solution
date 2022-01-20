@@ -4,14 +4,16 @@ using AUSIntermediate.Solution.ServiceLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AUSIntermediate.Solution.ServiceLayer.Migrations
 {
     [DbContext(typeof(AUSIntermediateDbContext))]
-    partial class AUSIntermediateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220120075309_removecompanyid2")]
+    partial class removecompanyid2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,7 +203,7 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                         {
                             UserId = 1,
                             Contact = "0761234566",
-                            DateOfBirth = new DateTime(2022, 1, 20, 10, 10, 25, 618, DateTimeKind.Local).AddTicks(5517),
+                            DateOfBirth = new DateTime(2022, 1, 20, 9, 53, 8, 500, DateTimeKind.Local).AddTicks(6853),
                             Email = "John@ausafrica.com",
                             IdentityNumber = "1234567890123",
                             Name = "John",
@@ -211,7 +213,7 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                         {
                             UserId = 2,
                             Contact = "0761234566",
-                            DateOfBirth = new DateTime(2022, 1, 20, 10, 10, 25, 619, DateTimeKind.Local).AddTicks(5145),
+                            DateOfBirth = new DateTime(2022, 1, 20, 9, 53, 8, 501, DateTimeKind.Local).AddTicks(5910),
                             Email = "xolani@gmail.com",
                             IdentityNumber = "1234567890123",
                             Name = "Xolani",

@@ -62,7 +62,17 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
                 var newUser = _objecMapper.Map<UserModel, UserDTO>(user);
                 try
                 {
-                    
+                    if(user.IdentityNumber.Length!=13)
+                    {
+                        _notyf.Error("Invalid ID Number");
+                        return View(user);
+                    }
+                    if (user.Contact.Length != 10)
+                    {
+                        _notyf.Error("Invalid Contact Number");
+                        return View(user);  
+                    }
+
                     var savedUser = await _userBusiness.AddNewUser(newUser);
                     
                     if (user.ResidentialAddress != null)
@@ -115,12 +125,25 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
         {
             try
             {
-                await _userBusiness.UpdateUser(_objecMapper.Map<UserDTO>(user));
-                if(user.PostalAddress != null)
-                await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.PostalAddress));
-                if (user.PostalAddress != null)
-                await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.ResidentialAddress));
-                _notyf.Success("Successfully Updated Data");
+                if(ModelState.IsValid)
+                {
+                    if (user.IdentityNumber.Length != 13)
+                    {
+                        _notyf.Error("Invalid ID Number");
+                        return View(user);
+                    }
+                    if (user.Contact.Length != 10)
+                    {
+                        _notyf.Error("Invalid Contact Number");
+                        return View(user);
+                    }
+                    await _userBusiness.UpdateUser(_objecMapper.Map<UserDTO>(user));
+                    if (user.PostalAddress != null)
+                        await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.PostalAddress));
+                    if (user.PostalAddress != null)
+                        await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.ResidentialAddress));
+                    _notyf.Success("Successfully Updated Data");
+                }                
             }
             catch (Exception ex)
             {

@@ -72,7 +72,7 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
                     ComplexName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsResidentialAddress = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    
                 },
                 constraints: table =>
                 {
@@ -98,18 +98,15 @@ namespace AUSIntermediate.Solution.ServiceLayer.Migrations
 
             migrationBuilder.InsertData(
                 table: "Addresses",
-                columns: new[] { "AddressId", "City", "CompanyId", "ComplexName", "Country", "IsResidentialAddress", "PostalCode", "Province", "Suburb", "UnitNUmber", "UserId" },
-                values: new object[] { 1, "Midrand", 0, "Business Complex", "South Africa", true, "01100", "Gauteng", "Midrand", "45627", 2 });
+                columns: new[] { "AddressId", "City", "ComplexName", "Country", "IsResidentialAddress", "PostalCode", "Province", "Suburb", "UnitNUmber", "UserId" },
+                values: new object[] { 1, "Midrand", "Business Complex", "South Africa", true, "01100", "Gauteng", "Midrand", "45627", 2 });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
-                columns: new[] { "AddressId", "City", "CompanyId", "ComplexName", "Country", "IsResidentialAddress", "PostalCode", "Province", "Suburb", "UnitNUmber", "UserId" },
-                values: new object[] { 2, "Durban", 0, "Curry Road", "South Africa", false, "01100", "Kwazulu Natal", "Newlands", "X1234", 2 });
+                columns: new[] { "AddressId", "City", "ComplexName", "Country", "IsResidentialAddress", "PostalCode", "Province", "Suburb", "UnitNUmber", "UserId" },
+                values: new object[] { 2, "Durban", "Curry Road", "South Africa", false, "01100", "Kwazulu Natal", "Newlands", "X1234", 2 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Addresses_CompanyId",
-                table: "Addresses",
-                column: "CompanyId");
+           
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_UserId",
