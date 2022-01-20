@@ -101,7 +101,6 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
 
 
             }
-
             return View(user);
         }
         public async Task<IActionResult> Edit(int? id)
