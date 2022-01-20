@@ -1,5 +1,6 @@
 # AUSIntermediate.Solution
 #How to bootstrap the application
+
  #1.Open the project using Visual Studio
  
  #2.Navigate to the appsettings file
