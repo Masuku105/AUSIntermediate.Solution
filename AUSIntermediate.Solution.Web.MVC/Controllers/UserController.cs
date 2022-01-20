@@ -141,6 +141,7 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
                         await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.PostalAddress));
                     if (user.PostalAddress != null)
                         await _addressBusiness.UpdateAddress(_objecMapper.Map<AddressDTO>(user.ResidentialAddress));
+
                     _notyf.Success("Successfully Updated Data");
                 }                
             }
@@ -176,7 +177,7 @@ namespace AUSIntermediate.Solution.Web.MVC.Controllers
             {
                 _notyf.Error($"An Exception Occured {ex.Message}");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "User");
         }
 
 
